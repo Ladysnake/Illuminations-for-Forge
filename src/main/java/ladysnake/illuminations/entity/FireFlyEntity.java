@@ -2,10 +2,6 @@ package ladysnake.illuminations.entity;
 
 import java.util.HashMap;
 
-import javax.annotation.Nullable;
-
-import com.google.common.math.Quantiles.Scale;
-
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ILivingEntityData;
@@ -13,7 +9,6 @@ import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.PacketBuffer;
@@ -28,7 +23,7 @@ import net.minecraft.world.LightType;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 
-public class FireFlyEntity extends MobEntity implements IEntityAdditionalSpawnData {
+public class FireFlyEntity extends LightOrbEntity implements IEntityAdditionalSpawnData {
 
     private static final DataParameter<Float> SCALE_MODIFIER = EntityDataManager.createKey(PlayerEntity.class, DataSerializers.FLOAT);
     private static final DataParameter<Float> COLOR_MODIFIER = EntityDataManager.createKey(PlayerEntity.class, DataSerializers.FLOAT);
@@ -49,8 +44,6 @@ public class FireFlyEntity extends MobEntity implements IEntityAdditionalSpawnDa
     public FireFlyEntity(EntityType<? extends MobEntity> type, World world) {
 
         super(type, world);
-
-        this.setNoGravity(true);
 
         this.canDespawn = true;
         this.isAttractedByLight = true;
