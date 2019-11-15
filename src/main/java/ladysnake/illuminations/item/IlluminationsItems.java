@@ -2,6 +2,7 @@ package ladysnake.illuminations.item;
 
 import ladysnake.illuminations.entity.FireFlyEntity;
 import ladysnake.illuminations.mod.Illuminations;
+import ladysnake.illuminations.registry.IlluminationsEntityRegistry;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -43,16 +44,20 @@ public class IlluminationsItems {
 
         firefly = new Item(firefly_prop) {
 
+            @Override
             public ActionResultType onItemUse(ItemUseContext context) {
 
-                BlockPos pos = context.getPos();
-                /** TODO FIXME */
-                FireFlyEntity firefly = new FireFlyEntity(null, context.getWorld());
-                firefly.setPosition(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5);
-                context.getWorld().addEntity(firefly);
+                if(!context.getWorld().isRemote)
+                {
+                    BlockPos pos = context.getPos();
+                    FireFlyEntity firefly = new FireFlyEntity(IlluminationsEntityRegistry.firefly_entity_type, context.getWorld());
+                    firefly.setPosition(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5);
+                    context.getWorld().addEntity(firefly);
 
-                if (!context.getPlayer().abilities.isCreativeMode)
-                    context.getItem().shrink(1);
+                    if (!context.getPlayer().abilities.isCreativeMode)
+                        context.getItem().shrink(1); 
+                }
+               
 
                 return ActionResultType.SUCCESS;
             };
