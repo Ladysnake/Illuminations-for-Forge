@@ -154,15 +154,20 @@ public class FireFlyEntity extends LightOrbEntity implements IEntityAdditionalSp
     public void tick() {
 
         super.tick();
+        
+        if(this.world.getGameTime() % 20 == 0)
+        {
+            //kill when further away then 3 chunks
+            boolean anyPlayerCloseBy = world.isPlayerWithin(this.posX, this.posY, this.posZ, 48);
 
-        boolean anyPlayerCloseBy = world.isPlayerWithin(this.posX, this.posY, this.posZ, 48);
+            if (!anyPlayerCloseBy)
+                this.remove(); 
+        }
 
-        if (!anyPlayerCloseBy)
-            this.remove();
 
-        // long dayTime = this.world.getWorldInfo().getDayTime();
-        // if (dayTime > 1000 && dayTime < 12990)
-        // this.remove();
+         long dayTime = this.world.getWorldInfo().getDayTime();
+         if (dayTime > 1000 && dayTime < 12990)
+         this.remove();
 
         if (this.isBurning())
             this.remove();
