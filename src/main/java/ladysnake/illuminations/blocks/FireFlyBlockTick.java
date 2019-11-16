@@ -18,7 +18,8 @@ public class FireFlyBlockTick {
     public static void tick(BlockState state, World world, BlockPos pos, Random random) {
 
         if (!world.isRemote && !world.isDaytime()) {
-            boolean anyPlayerCloseBy = world.isPlayerWithin(pos.getX(), pos.getY(), pos.getZ(), 32);
+            //spawn when in chunk > radius is 16
+            boolean anyPlayerCloseBy = world.isPlayerWithin(pos.getX(), pos.getY(), pos.getZ(), 16);
             // grow 16 on both neg and pos sides, so 32 total
             List<FireFlyEntity> firefliesInRadius = world.getEntitiesWithinAABB(FireFlyEntity.class, new AxisAlignedBB(pos).grow(16, 16, 16));
 
@@ -26,10 +27,7 @@ public class FireFlyBlockTick {
 
                 int toSpawn = 0;
 
-                if (firefliesInRadius.size() == 0)
-                    toSpawn = random.nextInt(MAX_FIREFLIES) + MIN_FIREFLIES;
-
-                else if (firefliesInRadius.size() < MAX_FIREFLIES)
+                if (firefliesInRadius.size() < MAX_FIREFLIES)
                     toSpawn = 1;
 
                 if (toSpawn > 0) {
