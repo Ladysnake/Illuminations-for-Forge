@@ -18,11 +18,13 @@ import net.minecraft.util.ResourceLocation;
 
 public class RenderFireFly<E extends FireFlyEntity> extends EntityRenderer<E> {
 
-    private static final ResourceLocation resLoc = new ResourceLocation(Illuminations.MODID, "textures/entity/firefly.png");
+    private static final ResourceLocation tex = new ResourceLocation(Illuminations.MODID, "textures/entity/firefly.png");
+    private static final ResourceLocation tex_overlay = new ResourceLocation(Illuminations.MODID, "textures/entity/firefly_overlay.png");
 
     public RenderFireFly(EntityRendererManager renderManager) {
 
         super(renderManager);
+        this.shadowSize = 0;
     }
 
     ///render code mostly stolen from exp orb renderer
@@ -42,7 +44,6 @@ public class RenderFireFly<E extends FireFlyEntity> extends EntityRenderer<E> {
             
             RenderHelper.enableStandardItemLighting();
             
-            int j = entity.getBrightnessForRender();
             int k = 240;
             int l = 240;
             
@@ -61,7 +62,7 @@ public class RenderFireFly<E extends FireFlyEntity> extends EntityRenderer<E> {
             Float nextAlphaGoal = entity.getNextAlphaGoal();
             
             // if just spawned
-            if (entity.ticksExisted < 1) {
+            if (entity.ticksExisted < 10) {
                 alpha = 0;
             }
 
@@ -101,7 +102,10 @@ public class RenderFireFly<E extends FireFlyEntity> extends EntityRenderer<E> {
             for(int i = 0 ; i < 2 ; i++)
             {
                 if(i == 1)
+                {
+                    this.bindTexture(tex_overlay);
                     GlStateManager.color4f(1F, 1F, 1F, entity.getAlpha());
+                }
                 else
                     GlStateManager.color4f(color, 1F, 0F, entity.getAlpha());
                 
@@ -124,7 +128,7 @@ public class RenderFireFly<E extends FireFlyEntity> extends EntityRenderer<E> {
     @Override
     protected ResourceLocation getEntityTexture(E entity) {
 
-        return resLoc;
+        return tex;
     }
 
     /**rounds a number to the' precision value' + 1 after the comma, rather then the first value after the comma*/
