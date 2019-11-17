@@ -5,7 +5,7 @@ import java.util.function.Function;
 
 import com.mojang.datafixers.Dynamic;
 
-import ladysnake.illuminations.blocks.IlluminationsBlocks;
+import ladysnake.illuminations.mod.Illuminations;
 import net.minecraft.block.DoublePlantBlock;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
@@ -28,12 +28,12 @@ public class GrassGenFeature extends Feature<ProbabilityConfig> {
 
         for(int j = 0; j < 64; ++j) {
            BlockPos blockpos = pos.add(random.nextInt(8) - random.nextInt(8), random.nextInt(4) - random.nextInt(4), random.nextInt(8) - random.nextInt(8));
-           if (world.isAirBlock(blockpos) && blockpos.getY() < 255 && IlluminationsBlocks.grass.getDefaultState().isValidPosition(world, blockpos)) {
+           if (world.isAirBlock(blockpos) && blockpos.getY() < 255 && Illuminations.ObjectHolders.GRASS_BLOCK.getDefaultState().isValidPosition(world, blockpos)) {
              
                if (random.nextBoolean())
-                   ((DoublePlantBlock) IlluminationsBlocks.tall_grass).placeAt(world, blockpos, 2);
+                   ((DoublePlantBlock) Illuminations.ObjectHolders.TALL_GRASS_BLOCK).placeAt(world, blockpos, 2);
                else
-                   world.setBlockState(blockpos, IlluminationsBlocks.grass.getDefaultState(), 2);
+                   world.setBlockState(blockpos, Illuminations.ObjectHolders.TALL_GRASS_BLOCK.getDefaultState(), 2);
               ++i;
            }
         }

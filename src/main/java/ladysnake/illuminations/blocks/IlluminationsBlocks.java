@@ -14,25 +14,26 @@ public class IlluminationsBlocks {
 
     private static Properties grass_prop = PropertiesWrapper.fromBlockProperty(Blocks.GRASS).lightValue(1);
 
-    public static FireFlyGrassBlock grass = new FireFlyGrassBlock(grass_prop);
-    public static FireFlyTallGrassBlock tall_grass = new FireFlyTallGrassBlock(grass_prop);
-
-    //no need to access this at any point. hence they are private
-    private static BlockItem grass_item = new BlockItem(grass, PropertiesWrapper.getItemProperties().group(ItemGroup.DECORATIONS));
-    private static BlockItem tall_grass_item = new BlockItem(tall_grass, PropertiesWrapper.getItemProperties().group(ItemGroup.DECORATIONS));
-
+    /** Should only be called when initializing Blocks in the Registry event */
     public static Block[] registry() {
 
+        FireFlyGrassBlock grass = new FireFlyGrassBlock(grass_prop);
         grass.setRegistryName(new ResourceLocation(Illuminations.MODID, "firefly_grass"));
+
+        FireFlyTallGrassBlock tall_grass = new FireFlyTallGrassBlock(grass_prop);
         tall_grass.setRegistryName(new ResourceLocation(Illuminations.MODID, "firefly_tall_grass"));
 
         return new Block[] { grass, tall_grass };
     }
 
+    /** Should only be called when initializing Items in the Registry event */
     public static Item[] blockItemRegistry() {
 
-        grass_item.setRegistryName(grass.getRegistryName());
-        tall_grass_item.setRegistryName(tall_grass.getRegistryName());
+        BlockItem grass_item = new BlockItem(Illuminations.ObjectHolders.GRASS_BLOCK, PropertiesWrapper.getItemProperties().group(ItemGroup.DECORATIONS));
+        grass_item.setRegistryName(Illuminations.ObjectHolders.GRASS_BLOCK.getRegistryName());
+
+        BlockItem tall_grass_item = new BlockItem(Illuminations.ObjectHolders.GRASS_BLOCK, PropertiesWrapper.getItemProperties().group(ItemGroup.DECORATIONS));
+        tall_grass_item.setRegistryName(Illuminations.ObjectHolders.GRASS_BLOCK.getRegistryName());
 
         return new BlockItem[] { grass_item, tall_grass_item };
     }

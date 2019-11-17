@@ -2,6 +2,7 @@ package ladysnake.illuminations.blocks;
 
 import java.util.Random;
 
+import ladysnake.illuminations.mod.Illuminations;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.DoublePlantBlock;
 import net.minecraft.block.TallGrassBlock;
@@ -38,7 +39,7 @@ public class FireFlyGrassBlock extends TallGrassBlock {
     @Override
     public void grow(World worldIn, Random rand, BlockPos pos, BlockState state) {
 
-        DoublePlantBlock doubleplantblock = (DoublePlantBlock) IlluminationsBlocks.tall_grass;
+        DoublePlantBlock doubleplantblock = (DoublePlantBlock) Illuminations.ObjectHolders.GRASS_BLOCK;
 
         if (doubleplantblock.getDefaultState().isValidPosition(worldIn, pos) && worldIn.isAirBlock(pos.up())) {
             doubleplantblock.placeAt(worldIn, pos, 2);

@@ -1,6 +1,5 @@
 package ladysnake.illuminations.client.registry;
 
-import ladysnake.illuminations.blocks.IlluminationsBlocks;
 import ladysnake.illuminations.mod.Illuminations;
 import net.minecraft.block.Blocks;
 import net.minecraftforge.api.distmarker.Dist;
@@ -18,11 +17,11 @@ public class IlluminationsColorRegistry {
         event.getBlockColors().register((block, pos, world, layer) -> {
             int color = event.getBlockColors().getColor(Blocks.GRASS.getDefaultState(), pos, world, layer);
             return color;
-        }, IlluminationsBlocks.grass);
+        }, Illuminations.ObjectHolders.GRASS_BLOCK);
 
         event.getBlockColors().register((block, pos, world, layer) -> {
             int color = event.getBlockColors().getColor(Blocks.GRASS.getDefaultState(), pos, world, layer);
             return color;
-        }, IlluminationsBlocks.tall_grass);
+        }, Illuminations.ObjectHolders.TALL_GRASS_BLOCK);
     }
 }

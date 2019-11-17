@@ -2,7 +2,7 @@ package ladysnake.illuminations.item;
 
 import ladysnake.illuminations.entity.FireFlyEntity;
 import ladysnake.illuminations.mod.Illuminations;
-import ladysnake.illuminations.registry.IlluminationsEntityRegistry;
+import ladysnake.illuminations.util.PropertiesWrapper;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -15,14 +15,12 @@ import net.minecraft.util.math.BlockPos;
 
 public class IlluminationsItems {
 
-    private static Properties bugnet_prop = new Properties().defaultMaxDamage(238).group(ItemGroup.TOOLS);
-    private static Properties firefly_prop = new Properties().group(ItemGroup.MISC);
+    private static final Properties BUG_NET_PROPERTY = PropertiesWrapper.getItemProperties().defaultMaxDamage(238).group(ItemGroup.TOOLS);
+    private static final Properties FIREFLY_PROPERTY = PropertiesWrapper.getItemProperties().group(ItemGroup.MISC);
 
-    public static Item bugnet, firefly;
+    public static Item[] registery() {
 
-    public static void init() {
-
-        bugnet = new Item(bugnet_prop) {
+        Item bugnet = new Item(BUG_NET_PROPERTY) {
 
             @Override
             public boolean hitEntity(ItemStack stack, LivingEntity target, LivingEntity attacker) {
@@ -42,29 +40,24 @@ public class IlluminationsItems {
             };
         }.setRegistryName(Illuminations.MODID, "bug_net");
 
-        firefly = new Item(firefly_prop) {
+        Item firefly = new Item(FIREFLY_PROPERTY) {
 
             @Override
             public ActionResultType onItemUse(ItemUseContext context) {
 
-                if(!context.getWorld().isRemote)
-                {
+                if (!context.getWorld().isRemote) {
                     BlockPos pos = context.getPos();
-                    FireFlyEntity firefly = new FireFlyEntity(IlluminationsEntityRegistry.firefly_entity_type, context.getWorld());
+                    FireFlyEntity firefly = new FireFlyEntity(Illuminations.ObjectHolders.FIREFLY_ENTITY_TYPE, context.getWorld());
                     firefly.setPosition(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5);
                     context.getWorld().addEntity(firefly);
 
                     if (!context.getPlayer().abilities.isCreativeMode)
-                        context.getItem().shrink(1); 
+                        context.getItem().shrink(1);
                 }
-               
 
                 return ActionResultType.SUCCESS;
             };
         }.setRegistryName(Illuminations.MODID, "firefly");
-    }
-
-    public static Item[] registery() {
 
         return new Item[] { bugnet, firefly };
     }

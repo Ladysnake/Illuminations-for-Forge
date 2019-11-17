@@ -20,20 +20,21 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 @EventBusSubscriber(modid = Illuminations.MODID, bus = Bus.MOD)
 public class IlluminationsFeatureRegistry {
 
-    public static Feature<ProbabilityConfig> FIREFLY_PLANT;
-
     @SubscribeEvent
     public static void registerFeature(RegistryEvent.Register<Feature<?>> e) {
 
-        FIREFLY_PLANT = new GrassGenFeature(ProbabilityConfig::deserialize);
+        // Make feature
+        Feature<ProbabilityConfig> FIREFLY_PLANT = new GrassGenFeature(ProbabilityConfig::deserialize);
         FIREFLY_PLANT.setRegistryName(Illuminations.MODID, "fire_fly_worldgen_feature");
-        
+
+        // Register feature
         e.getRegistry().register(FIREFLY_PLANT);
 
-        System.out.println("registered FIREFLY feature !!");
+        // make list of biomes in which feature should naturally spawn
         List<Biome.Category> fireflyBiomes = Arrays.asList(Category.PLAINS, Category.SWAMP, Category.FOREST, Category.JUNGLE, Category.SAVANNA, Category.RIVER);
+
+        // Add feature to every biome we defined to be generated
         for (Biome biome : Biome.BIOMES) {
-            System.out.println("added feature for " + biome);
             if (fireflyBiomes.contains(biome.getCategory())) {
                 biome.addFeature(Decoration.VEGETAL_DECORATION,
                         Biome.createDecoratedFeature(FIREFLY_PLANT, new ProbabilityConfig(10F), Placement.COUNT_RANGE, new CountRangeConfig(90, 0, 0, 250)));
