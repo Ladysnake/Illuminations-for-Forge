@@ -44,10 +44,9 @@ public class RenderFireFly<E extends FireFlyEntity> extends EntityRenderer<E> {
             
             RenderHelper.enableStandardItemLighting();
             
-            int k = 240;
-            int l = 240;
-            
-            GLX.glMultiTexCoord2f(GLX.GL_TEXTURE1, (float)k, (float)l);
+            //relative luminosity in the world.
+            //non calculated : always be luminous (240 is max)
+            GLX.glMultiTexCoord2f(GLX.GL_TEXTURE1, 240, 240);
             GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
            
             GlStateManager.translatef(0.0F, 0.1F, 0.0F);
@@ -133,7 +132,9 @@ public class RenderFireFly<E extends FireFlyEntity> extends EntityRenderer<E> {
 
     /**rounds a number to the' precision value' + 1 after the comma, rather then the first value after the comma*/
     private static float round(float value, int precision) {
+        
         int scale = (int) Math.pow(10, precision);
+        
         return (float) Math.round(value * scale) / scale;
     }
 }

@@ -23,23 +23,21 @@ public class GrassGenFeature extends Feature<ProbabilityConfig> {
 
     @Override
     public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> generator, Random random, BlockPos pos, ProbabilityConfig config) {
-        
+
         int i = 0;
 
-        for(int j = 0; j < 64; ++j) {
-           BlockPos blockpos = pos.add(random.nextInt(8) - random.nextInt(8), random.nextInt(4) - random.nextInt(4), random.nextInt(8) - random.nextInt(8));
-           if (world.isAirBlock(blockpos) && blockpos.getY() < 255 && Illuminations.ObjectHolders.GRASS_BLOCK.getDefaultState().isValidPosition(world, blockpos)) {
-             
-               if (random.nextBoolean())
-                   ((DoublePlantBlock) Illuminations.ObjectHolders.TALL_GRASS_BLOCK).placeAt(world, blockpos, 2);
-               else
-                   world.setBlockState(blockpos, Illuminations.ObjectHolders.TALL_GRASS_BLOCK.getDefaultState(), 2);
-              ++i;
-           }
+        for (int j = 0; j < 64; ++j) {
+            BlockPos blockpos = pos.add(random.nextInt(8) - random.nextInt(8), random.nextInt(4) - random.nextInt(4), random.nextInt(8) - random.nextInt(8));
+            if (world.isAirBlock(blockpos) && blockpos.getY() < 255
+                    && Illuminations.ObjectHolders.GRASS_BLOCK.getDefaultState().isValidPosition(world, blockpos)) {
+
+                if (random.nextBoolean())
+                    ((DoublePlantBlock) Illuminations.ObjectHolders.TALL_GRASS_BLOCK).placeAt(world, blockpos, 2);
+                else
+                    world.setBlockState(blockpos, Illuminations.ObjectHolders.TALL_GRASS_BLOCK.getDefaultState(), 2);
+                ++i;
+            }
         }
-
         return i > 0;
-
     }
-
 }

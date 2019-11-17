@@ -48,16 +48,19 @@ public class LightOrbEntity extends MobEntity {
 
     }
 
+    // No colliding or pushing players or other mobs
     @Override
     public void applyEntityCollision(Entity entityIn) {
 
     }
 
+    // No colliding or pushing players or other mobs
     @Override
     protected void collideWithEntity(Entity entityIn) {
 
     }
 
+    // no leashing
     @Override
     public boolean canBeLeashedTo(PlayerEntity player) {
 

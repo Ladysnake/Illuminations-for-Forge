@@ -63,26 +63,28 @@ public class FireFlyEntity extends LightOrbEntity implements IEntityAdditionalSp
 
     }
 
-    //set data once, and only when joining the world. this one is called and sets the scale and color correctly. onInitialSpawn isnt being called AFAIK
+    // set data once, and only when joining the world. this one is called and sets
+    // the scale and color correctly. onInitialSpawn isnt being called AFAIK
     @Override
     public void onAddedToWorld() {
-    
+
         this.dataManager.set(SCALE_MODIFIER, 0.1F + this.rand.nextFloat() * 0.15F);
         this.dataManager.set(COLOR_MODIFIER, 0.25F + this.rand.nextFloat() * 0.75F);
 
         super.onAddedToWorld();
     }
-    
-    //this one is never called to my testing. need to find out where it comes from. will keep the info here anyway
+
+    // this one is never called to my testing. need to find out where it comes from.
+    // will keep the info here anyway
     @Override
     public ILivingEntityData onInitialSpawn(IWorld worldIn, DifficultyInstance difficultyIn, SpawnReason reason, ILivingEntityData spawnDataIn, CompoundNBT dataTag) {
 
         this.dataManager.set(SCALE_MODIFIER, 0.1F + this.rand.nextFloat() * 0.15F);
         this.dataManager.set(COLOR_MODIFIER, 0.25F + this.rand.nextFloat() * 0.75F);
-        
+
         return super.onInitialSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
     }
-    
+
     public float getScaleModifier() {
 
         return this.dataManager.get(SCALE_MODIFIER);
@@ -142,8 +144,8 @@ public class FireFlyEntity extends LightOrbEntity implements IEntityAdditionalSp
     @Override
     public boolean canSpawn(IWorld world, SpawnReason spawnReasonIn) {
 
-        // if (this.world.isDaytime())
-        // return false;
+        if (this.world.isDaytime())
+            return false;
         if (this.world.isThundering())
             return false;
 
@@ -154,20 +156,18 @@ public class FireFlyEntity extends LightOrbEntity implements IEntityAdditionalSp
     public void tick() {
 
         super.tick();
-        
-        if(this.world.getGameTime() % 20 == 0)
-        {
-            //kill when further away then 3 chunks
+
+        if (this.world.getGameTime() % 20 == 0) {
+            // kill when further away then 3 chunks
             boolean anyPlayerCloseBy = world.isPlayerWithin(this.posX, this.posY, this.posZ, 48);
 
             if (!anyPlayerCloseBy)
-                this.remove(); 
+                this.remove();
         }
 
-
-         long dayTime = this.world.getWorldInfo().getDayTime();
-         if (dayTime > 1000 && dayTime < 12990)
-         this.remove();
+        long dayTime = this.world.getWorldInfo().getDayTime();
+        if (dayTime > 1000 && dayTime < 12990)
+            this.remove();
 
         if (this.isBurning())
             this.remove();

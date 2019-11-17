@@ -33,6 +33,7 @@ public class FireFlyGrassBlock extends TallGrassBlock {
     public void tick(BlockState state, World world, BlockPos pos, Random random) {
 
         FireFlyBlockTick.tick(state, world, pos, random);
+        
         super.tick(state, world, pos, random);
     }
 

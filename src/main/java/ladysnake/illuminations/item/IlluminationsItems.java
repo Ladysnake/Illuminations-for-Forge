@@ -33,9 +33,11 @@ public class IlluminationsItems {
                 target.remove();
 
                 PlayerEntity player = (PlayerEntity) attacker;
+
                 stack.damageItem(1, player, p -> {
                     p.setHeldItem(player.getActiveHand(), ItemStack.EMPTY);
                 });
+
                 return true;
             };
         }.setRegistryName(Illuminations.MODID, "bug_net");
@@ -46,9 +48,12 @@ public class IlluminationsItems {
             public ActionResultType onItemUse(ItemUseContext context) {
 
                 if (!context.getWorld().isRemote) {
+
                     BlockPos pos = context.getPos();
+
                     FireFlyEntity firefly = new FireFlyEntity(Illuminations.ObjectHolders.FIREFLY_ENTITY_TYPE, context.getWorld());
                     firefly.setPosition(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5);
+
                     context.getWorld().addEntity(firefly);
 
                     if (!context.getPlayer().abilities.isCreativeMode)
