@@ -10,9 +10,9 @@ import net.minecraft.world.World;
 
 public class LightOrbEntity extends MobEntity {
 
-    protected LightOrbEntity(EntityType<? extends MobEntity> type, World worldIn) {
+    protected LightOrbEntity(EntityType<? extends MobEntity> fireflyEntityType, World worldIn) {
 
-        super(type, worldIn);
+        super(fireflyEntityType, worldIn);
     }
 
     // entity can 'fly'
@@ -40,6 +40,12 @@ public class LightOrbEntity extends MobEntity {
     protected SoundEvent getDeathSound() {
 
         return null;
+    }
+    
+    //dont be silly. fireflies can't run ! they fly
+    @Override
+    protected void createRunningParticles() {
+
     }
 
     // handles particle spawn on death.
@@ -78,5 +84,10 @@ public class LightOrbEntity extends MobEntity {
 
         return false;
     }
-
+    
+    @Override
+    public boolean isInRangeToRenderDist(double distance) {
+    
+        return distance < 256*256*256 ;
+    }
 }
