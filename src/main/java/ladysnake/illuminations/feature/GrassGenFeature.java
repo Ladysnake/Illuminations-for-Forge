@@ -26,17 +26,27 @@ public class GrassGenFeature extends Feature<ProbabilityConfig> {
 
         int i = 0;
 
-        for (int j = 0; j < 64; ++j) {
-            BlockPos blockpos = pos.add(random.nextInt(8) - random.nextInt(8), random.nextInt(4) - random.nextInt(4), random.nextInt(8) - random.nextInt(8));
-            if (world.isAirBlock(blockpos) && blockpos.getY() < 255
-                    && Illuminations.ObjectHolders.GRASS_BLOCK.getDefaultState().isValidPosition(world, blockpos)) {
+        for (int j = 0; j < 3; ++j) {
 
-                if (random.nextBoolean())
-                    ((DoublePlantBlock) Illuminations.ObjectHolders.TALL_GRASS_BLOCK).placeAt(world, blockpos, 2);
-                else
-                    world.setBlockState(blockpos, Illuminations.ObjectHolders.TALL_GRASS_BLOCK.getDefaultState(), 2);
-                ++i;
+            BlockPos blockpos = pos.add(random.nextInt(8) - random.nextInt(8), random.nextInt(4) - random.nextInt(4), random.nextInt(8) - random.nextInt(8));
+
+            int pack_size = random.nextInt(8) + 3;
+            
+            for (int pack = 0; pack < pack_size*2; pack++)
+            {
+                BlockPos pos_around = blockpos.add(random.nextInt(4)-2, blockpos.getY(), random.nextInt(4)-2);
+                
+                if (world.isAirBlock(pos_around) && pos_around.getY() < 255
+                        && Illuminations.ObjectHolders.GRASS_BLOCK.getDefaultState().isValidPosition(world, pos_around)) {
+
+                    if (random.nextBoolean())
+                        ((DoublePlantBlock) Illuminations.ObjectHolders.TALL_GRASS_BLOCK).placeAt(world, pos_around, 2);
+                    else
+                        world.setBlockState(pos_around, Illuminations.ObjectHolders.TALL_GRASS_BLOCK.getDefaultState(), 2);
+                    ++i;
+                }
             }
+                
         }
         return i > 0;
     }
