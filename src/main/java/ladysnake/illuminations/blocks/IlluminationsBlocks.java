@@ -32,8 +32,8 @@ public class IlluminationsBlocks {
         BlockItem grass_item = new BlockItem(Illuminations.ObjectHolders.GRASS_BLOCK, PropertiesWrapper.getItemProperties().group(ItemGroup.DECORATIONS));
         grass_item.setRegistryName(Illuminations.ObjectHolders.GRASS_BLOCK.getRegistryName());
 
-        BlockItem tall_grass_item = new BlockItem(Illuminations.ObjectHolders.GRASS_BLOCK, PropertiesWrapper.getItemProperties().group(ItemGroup.DECORATIONS));
-        tall_grass_item.setRegistryName(Illuminations.ObjectHolders.GRASS_BLOCK.getRegistryName());
+        BlockItem tall_grass_item = new BlockItem(Illuminations.ObjectHolders.TALL_GRASS_BLOCK, PropertiesWrapper.getItemProperties().group(ItemGroup.DECORATIONS));
+        tall_grass_item.setRegistryName(Illuminations.ObjectHolders.TALL_GRASS_BLOCK.getRegistryName());
 
         return new BlockItem[] { grass_item, tall_grass_item };
     }
