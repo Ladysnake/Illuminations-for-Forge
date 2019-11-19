@@ -2,6 +2,7 @@ package ladysnake.illuminations.entity;
 
 import java.util.HashMap;
 
+import ladysnake.illuminations.mod.ConfigData;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ILivingEntityData;
@@ -158,8 +159,8 @@ public class FireFlyEntity extends LightOrbEntity implements IEntityAdditionalSp
         super.tick();
 
         if (this.world.getGameTime() % 20 == 0) {
-            // kill when further away then 3 chunks
-            boolean anyPlayerCloseBy = world.isPlayerWithin(this.posX, this.posY, this.posZ, 48);
+            // kill when further away then x chunks
+            boolean anyPlayerCloseBy = world.isPlayerWithin(this.posX, this.posY, this.posZ, ConfigData.despawn_firefly);
 
             if (!anyPlayerCloseBy)
                 this.remove();

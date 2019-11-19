@@ -1,5 +1,6 @@
 package ladysnake.illuminations.entity;
 
+import ladysnake.illuminations.mod.ConfigData;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
@@ -88,6 +89,8 @@ public class LightOrbEntity extends MobEntity {
     @Override
     public boolean isInRangeToRenderDist(double distance) {
     
-        return distance < 256*256*256 ;
+        int chunk_range = ConfigData.render_range;
+        //distance is squared
+        return distance <  chunk_range * chunk_range;
     }
 }
