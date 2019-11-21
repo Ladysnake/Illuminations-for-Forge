@@ -17,11 +17,11 @@ public class IlluminationsColorRegistry {
         event.getBlockColors().register((block, pos, world, layer) -> {
             int color = event.getBlockColors().getColor(Blocks.GRASS.getDefaultState(), pos, world, layer);
             return color;
-        }, Illuminations.ObjectHolders.GRASS_BLOCK);
+        }, Illuminations.ObjectHolders.FIREFLY_GRASS_BLOCK);
 
         event.getBlockColors().register((block, pos, world, layer) -> {
             int color = event.getBlockColors().getColor(Blocks.GRASS.getDefaultState(), pos, world, layer);
             return color;
-        }, Illuminations.ObjectHolders.TALL_GRASS_BLOCK);
+        }, Illuminations.ObjectHolders.FIREFLY_TALL_GRASS_BLOCK);
     }
 }

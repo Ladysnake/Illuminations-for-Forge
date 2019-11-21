@@ -42,13 +42,13 @@ public class Illuminations {
         public static final EntityType<FireFlyEntity> FIREFLY_ENTITY_TYPE = null;
 
         @ObjectHolder("firefly_grass")
-        public static final Block GRASS_BLOCK = null;
+        public static final Block FIREFLY_GRASS_BLOCK = null;
 
         @ObjectHolder("firefly_tall_grass")
-        public static final Block TALL_GRASS_BLOCK = null;
+        public static final Block FIREFLY_TALL_GRASS_BLOCK = null;
 
         @ObjectHolder("bug_net")
-        public static final Item BUG_NET = null;
+        public static final Item BUG_NET_ITEM = null;
 
         @ObjectHolder("firefly")
         public static final Item FIREFLY_ITEM = null;

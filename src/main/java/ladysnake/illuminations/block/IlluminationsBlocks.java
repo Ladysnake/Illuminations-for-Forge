@@ -1,4 +1,4 @@
-package ladysnake.illuminations.blocks;
+package ladysnake.illuminations.block;
 
 import ladysnake.illuminations.mod.Illuminations;
 import ladysnake.illuminations.util.PropertiesWrapper;
@@ -12,7 +12,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class IlluminationsBlocks {
 
-    private static Properties grass_prop = PropertiesWrapper.fromBlockProperty(Blocks.GRASS).lightValue(1);
+    private static Properties grass_prop = PropertiesWrapper.fromBlockProperty(Blocks.GRASS).lightValue(16);
 
     /** Should only be called when initializing Blocks in the Registry event */
     public static Block[] registry() {
@@ -29,11 +29,11 @@ public class IlluminationsBlocks {
     /** Should only be called when initializing Items in the Registry event */
     public static Item[] blockItemRegistry() {
 
-        BlockItem grass_item = new BlockItem(Illuminations.ObjectHolders.GRASS_BLOCK, PropertiesWrapper.getItemProperties().group(ItemGroup.DECORATIONS));
-        grass_item.setRegistryName(Illuminations.ObjectHolders.GRASS_BLOCK.getRegistryName());
+        BlockItem grass_item = new BlockItem(Illuminations.ObjectHolders.FIREFLY_GRASS_BLOCK, PropertiesWrapper.getItemProperties().group(ItemGroup.DECORATIONS));
+        grass_item.setRegistryName(Illuminations.ObjectHolders.FIREFLY_GRASS_BLOCK.getRegistryName());
 
-        BlockItem tall_grass_item = new BlockItem(Illuminations.ObjectHolders.TALL_GRASS_BLOCK, PropertiesWrapper.getItemProperties().group(ItemGroup.DECORATIONS));
-        tall_grass_item.setRegistryName(Illuminations.ObjectHolders.TALL_GRASS_BLOCK.getRegistryName());
+        BlockItem tall_grass_item = new BlockItem(Illuminations.ObjectHolders.FIREFLY_TALL_GRASS_BLOCK, PropertiesWrapper.getItemProperties().group(ItemGroup.DECORATIONS));
+        tall_grass_item.setRegistryName(Illuminations.ObjectHolders.FIREFLY_TALL_GRASS_BLOCK.getRegistryName());
 
         return new BlockItem[] { grass_item, tall_grass_item };
     }
