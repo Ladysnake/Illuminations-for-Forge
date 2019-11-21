@@ -1,4 +1,4 @@
-package ladysnake.illuminations.blocks;
+package ladysnake.illuminations.block;
 
 import java.util.List;
 import java.util.Random;

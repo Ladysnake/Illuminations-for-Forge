@@ -1,4 +1,4 @@
-package ladysnake.illuminations.blocks;
+package ladysnake.illuminations.block;
 
 import java.util.Random;
 
@@ -40,7 +40,7 @@ public class FireFlyGrassBlock extends TallGrassBlock {
     @Override
     public void grow(World worldIn, Random rand, BlockPos pos, BlockState state) {
 
-        DoublePlantBlock doubleplantblock = (DoublePlantBlock) Illuminations.ObjectHolders.GRASS_BLOCK;
+        DoublePlantBlock doubleplantblock = (DoublePlantBlock) Illuminations.ObjectHolders.FIREFLY_GRASS_BLOCK;
 
         if (doubleplantblock.getDefaultState().isValidPosition(worldIn, pos) && worldIn.isAirBlock(pos.up())) {
             doubleplantblock.placeAt(worldIn, pos, 2);
