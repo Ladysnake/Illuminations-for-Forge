@@ -1,6 +1,6 @@
 package ladysnake.illuminations.registry;
 
-import ladysnake.illuminations.blocks.IlluminationsBlocks;
+import ladysnake.illuminations.block.IlluminationsBlocks;
 import ladysnake.illuminations.mod.Illuminations;
 import net.minecraft.block.Block;
 import net.minecraftforge.event.RegistryEvent;
