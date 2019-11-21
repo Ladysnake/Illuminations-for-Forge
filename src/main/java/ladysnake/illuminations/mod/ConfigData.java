@@ -30,7 +30,7 @@ public class ConfigData {
     public static int start_spawning_flies = 1;
     // in blocks
     public static int max_flies_radius_near_block = 16;
-    public static int rarity = 1;
+    public static int rarity = 4;
 
     // in chunks
     public static int despawn_firefly = 10;
@@ -59,7 +59,7 @@ public class ConfigData {
             start_spawning_flies = builder.comment("How close by a player needs to be for fireflies to start spawning (value in chunks)")
                     .translation("translate.").defineInRange("start_spawning_flies", 1, 1, 32);
 
-            rarity = builder.comment("How rare the grass spawning is. Higher number means less rare").translation("translate.").defineInRange("rarity", 1, 1,
+            rarity = builder.comment("How rare the grass spawning is. Higher number means less rare").translation("translate.").defineInRange("rarity", 4, 1,
                     64);
             builder.pop();
 
