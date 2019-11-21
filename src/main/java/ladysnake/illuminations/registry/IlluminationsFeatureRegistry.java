@@ -3,7 +3,7 @@ package ladysnake.illuminations.registry;
 import java.util.Arrays;
 import java.util.List;
 
-import ladysnake.illuminations.feature.GrassGenFeature;
+import ladysnake.illuminations.feature.FireflyGrassGenFeature;
 import ladysnake.illuminations.mod.Illuminations;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.Category;
@@ -24,7 +24,7 @@ public class IlluminationsFeatureRegistry {
     public static void registerFeature(RegistryEvent.Register<Feature<?>> e) {
 
         // Make feature
-        Feature<ProbabilityConfig> FIREFLY_PLANT = new GrassGenFeature(ProbabilityConfig::deserialize);
+        Feature<ProbabilityConfig> FIREFLY_PLANT = new FireflyGrassGenFeature(ProbabilityConfig::deserialize);
         FIREFLY_PLANT.setRegistryName(Illuminations.MODID, "fire_fly_worldgen_feature");
 
         // Register feature
