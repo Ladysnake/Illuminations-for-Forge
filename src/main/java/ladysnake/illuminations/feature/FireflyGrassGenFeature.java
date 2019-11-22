@@ -31,7 +31,17 @@ public class FireflyGrassGenFeature extends Feature<ProbabilityConfig> {
         int i = 0;
 
         ArrayList<BlockPos> grass_batch = Lists.newArrayList();
-        int batch_size = random.nextInt(6) + 10;
+
+        // number of blocks in which grass will have a chance to generate around the center block
+        double reserved_generation_space = random.nextInt(10)+6;
+        double reserved_generation_space_squared = reserved_generation_space * reserved_generation_space;
+        
+        double proportional_grass_size_per_batch = reserved_generation_space_squared * 0.45;
+        
+        double guaranteed_grass_size = proportional_grass_size_per_batch * 0.625;
+        double random_grass_size = proportional_grass_size_per_batch - guaranteed_grass_size;
+        
+        int batch_size = random.nextInt((int)random_grass_size) + (int)guaranteed_grass_size;
 
         for (int rarity = 0; rarity < ConfigData.rarity; ++rarity) {
 
@@ -53,9 +63,9 @@ public class FireflyGrassGenFeature extends Feature<ProbabilityConfig> {
 
             while (grass_batch.size() < batch_size) {
 
-                // square of 6x6, random position generated
-                int x = random.nextInt(6) - 3;
-                int z = random.nextInt(6) - 3;
+                // square of X*X, random position generated
+                int x = random.nextInt((int)reserved_generation_space) - (int)(reserved_generation_space / 2D);
+                int z = random.nextInt((int)reserved_generation_space) - (int)(reserved_generation_space / 2D);
 
                 int blockPosX = blockpos.getX() + x;
                 int blockPosZ = blockpos.getZ() + z;
