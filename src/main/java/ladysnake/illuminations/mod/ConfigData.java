@@ -44,7 +44,7 @@ public class ConfigData {
         public final ForgeConfigSpec.IntValue start_spawning_flies;
         public final ForgeConfigSpec.IntValue max_flies_radius_near_block;
         public final ForgeConfigSpec.IntValue despawn_firefly;
-        public final ForgeConfigSpec.IntValue rarity;
+//        public final ForgeConfigSpec.IntValue rarity;
 
         ServerConfig(ForgeConfigSpec.Builder builder) {
 
@@ -59,8 +59,8 @@ public class ConfigData {
             start_spawning_flies = builder.comment("How close by a player needs to be for fireflies to start spawning (value in chunks)")
                     .translation("translate.").defineInRange("start_spawning_flies", 1, 1, 32);
 
-            rarity = builder.comment("How rare the grass spawning is. Higher number means less rare").translation("translate.").defineInRange("rarity", 4, 1,
-                    64);
+//            rarity = builder.comment("How rare the grass spawning is. Higher number means less rare").translation("translate.").defineInRange("rarity", 4, 1,
+//                    64);
             builder.pop();
 
             builder.push("Firefly Entity");
@@ -100,7 +100,7 @@ public class ConfigData {
 
         max_flies_near_block = SERVER.max_flies_near_block.get();
         max_flies_radius_near_block = SERVER.max_flies_radius_near_block.get();
-        rarity = SERVER.rarity.get();
+        //rarity = SERVER.rarity.get();
 
         //value is given in chunks, so we convert back to blocks
         despawn_firefly = SERVER.despawn_firefly.get() * 16;
