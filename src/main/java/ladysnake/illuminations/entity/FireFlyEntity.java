@@ -158,6 +158,7 @@ public class FireFlyEntity extends LightOrbEntity implements IEntityAdditionalSp
 
         super.tick();
 
+        //only check once every second to prevent (some) lag
         if (this.world.getGameTime() % 20 == 0) {
             // kill when further away then x chunks
             boolean anyPlayerCloseBy = world.isPlayerWithin(this.posX, this.posY, this.posZ, ConfigData.despawn_firefly);
