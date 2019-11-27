@@ -1,12 +1,14 @@
 package ladysnake.illuminations.entity;
 
 import ladysnake.illuminations.mod.ConfigData;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class LightOrbEntity extends MobEntity {
@@ -28,6 +30,12 @@ public class LightOrbEntity extends MobEntity {
     public void fall(float distance, float damageMultiplier) {
 
     }
+    
+    @Override
+    protected void updateFallState(double y, boolean onGroundIn, BlockState state, BlockPos pos)
+    {
+    
+    }
 
     // no hurt sound
     @Override
@@ -47,6 +55,18 @@ public class LightOrbEntity extends MobEntity {
     @Override
     protected void createRunningParticles() {
 
+    }
+    
+    @Override
+    public void spawnRunningParticles()
+    {
+    
+    }
+
+    @Override
+    protected boolean canTriggerWalking()
+    {
+        return false;
     }
 
     // handles particle spawn on death.
