@@ -12,7 +12,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class IlluminationsBlocks {
 
-    private static Properties grass_prop = PropertiesWrapper.fromBlockProperty(Blocks.GRASS).lightValue(16);
+    private static Properties grass_prop = PropertiesWrapper.fromBlockProperty(Blocks.GRASS).lightValue(1);
 
     /** Should only be called when initializing Blocks in the Registry event */
     public static Block[] registry() {
