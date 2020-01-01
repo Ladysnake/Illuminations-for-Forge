@@ -12,15 +12,18 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 public class IlluminationsColorRegistry {
 
     @SubscribeEvent
-    public static void register(ColorHandlerEvent.Block event) {
+    public static void register(ColorHandlerEvent.Block event)
+    {
 
         event.getBlockColors().register((block, pos, world, layer) -> {
-            int color = event.getBlockColors().getColor(Blocks.GRASS.getDefaultState(), pos, world, layer);
+            // getColor
+            int color = event.getBlockColors().func_228054_a_(Blocks.GRASS.getDefaultState(), pos, world, layer);
             return color;
         }, Illuminations.ObjectHolders.FIREFLY_GRASS_BLOCK);
 
         event.getBlockColors().register((block, pos, world, layer) -> {
-            int color = event.getBlockColors().getColor(Blocks.GRASS.getDefaultState(), pos, world, layer);
+            // getColor
+            int color = event.getBlockColors().func_228054_a_(Blocks.GRASS.getDefaultState(), pos, world, layer);
             return color;
         }, Illuminations.ObjectHolders.FIREFLY_TALL_GRASS_BLOCK);
     }

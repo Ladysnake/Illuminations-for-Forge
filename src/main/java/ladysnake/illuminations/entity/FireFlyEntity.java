@@ -183,7 +183,7 @@ public class FireFlyEntity extends LightOrbEntity implements IEntityAdditionalSp
             return;
 
         // kill when further away then x chunks
-        boolean anyPlayerCloseBy = world.isPlayerWithin(this.posX, this.posY, this.posZ, ConfigData.despawn_firefly);
+        boolean anyPlayerCloseBy = world.isPlayerWithin(this.serverPosX, this.serverPosY, this.serverPosZ, ConfigData.despawn_firefly);
 
         if (!anyPlayerCloseBy)
             this.remove();
@@ -200,11 +200,11 @@ public class FireFlyEntity extends LightOrbEntity implements IEntityAdditionalSp
         if ((xTarget == 0 && yTarget == 0 && zTarget == 0) || this.getPosition().distanceSq(xTarget, yTarget, zTarget, true) < 9 || targetChangeCooldown <= 0)
             selectBlockTarget();
 
-        Vec3d targetVector = new Vec3d(this.xTarget - this.posX, this.yTarget - this.posY, this.zTarget - this.posZ);
+        Vec3d targetVector = new Vec3d(this.xTarget - this.prevPosX, this.yTarget - this.prevPosY, this.zTarget - this.prevPosZ);
         double length = targetVector.length();
         targetVector = targetVector.scale(0.1 / length);
 
-        if (!this.world.getBlockState(new BlockPos(this.posX, this.posY - 0.1, this.posZ)).getBlock().canSpawnInBlock())
+        if (!this.world.getBlockState(new BlockPos(this.prevPosX, this.prevPosY - 0.1, this.prevPosZ)).getBlock().canSpawnInBlock())
             this.setMotion((0.9) * getMotion().x + (0.1) * targetVector.x, 0.05, (0.9) * getMotion().z + (0.1) * targetVector.z);
         else
             this.setMotion((0.9) * getMotion().x + (0.1) * targetVector.x, (0.9) * getMotion().y + (0.1) * targetVector.y,
@@ -222,23 +222,23 @@ public class FireFlyEntity extends LightOrbEntity implements IEntityAdditionalSp
             this.groundLevel = 0;
             for (int i = 0; i < 20; i++)
             {
-                BlockState checkedBlock = this.world.getBlockState(new BlockPos(this.posX, this.posY - i, this.posZ));
+                BlockState checkedBlock = this.world.getBlockState(new BlockPos(this.serverPosX, this.serverPosY - i, this.serverPosZ));
                 if (!checkedBlock.getBlock().canSpawnInBlock())
                 {
-                    this.groundLevel = this.posY - i;
+                    this.groundLevel = this.serverPosY - i;
                 }
                 if (this.groundLevel != 0)
                     break;
             }
 
-            this.xTarget = this.posX + this.rand.nextGaussian() * 10;
-            this.yTarget = Math.min(Math.max(this.posY + this.rand.nextGaussian() * 2, this.groundLevel), this.groundLevel + 4);
-            this.zTarget = this.posZ + this.rand.nextGaussian() * 10;
+            this.xTarget = this.serverPosX + this.rand.nextGaussian() * 10;
+            this.yTarget = Math.min(Math.max(this.serverPosY + this.rand.nextGaussian() * 2, this.groundLevel), this.groundLevel + 4);
+            this.zTarget = this.serverPosZ + this.rand.nextGaussian() * 10;
 
             if (this.world.getBlockState(new BlockPos(this.xTarget, this.yTarget, this.zTarget)).getBlock().canSpawnInBlock())
                 this.yTarget += 1;
 
-            if (this.world.getLightFor(LightType.SKY, this.getPosition()) > 8 && !this.world.isDaytime())
+            if (this.world.func_226658_a_(LightType.SKY, this.getPosition()) > 8 && !this.world.isDaytime())
                 this.lightTarget = getRandomLitBlockAround();
         }
         else
@@ -246,15 +246,15 @@ public class FireFlyEntity extends LightOrbEntity implements IEntityAdditionalSp
             this.xTarget = this.lightTarget.getX() + this.rand.nextGaussian();
             this.yTarget = this.lightTarget.getY() + this.rand.nextGaussian();
             this.zTarget = this.lightTarget.getZ() + this.rand.nextGaussian();
-
-            if (this.world.getLightFor(LightType.BLOCK, this.getPosition()) > 8)
+            //getLightFor = func 226658
+            if (this.world.func_226658_a_(LightType.BLOCK, this.getPosition()) > 8)
             {
                 BlockPos possibleTarget = getRandomLitBlockAround();
-                if (this.world.getLightFor(LightType.BLOCK, possibleTarget) > this.world.getLightFor(LightType.BLOCK, this.lightTarget))
+                if (this.world.func_226658_a_(LightType.BLOCK, possibleTarget) > this.world.func_226658_a_(LightType.BLOCK, this.lightTarget))
                     this.lightTarget = possibleTarget;
             }
 
-            if (this.world.getLightFor(LightType.BLOCK, this.getPosition()) <= 8 || this.world.isDaytime())
+            if (this.world.func_226658_a_(LightType.BLOCK, this.getPosition()) <= 8 || this.world.isDaytime())
                 this.lightTarget = null;
         }
 
@@ -267,9 +267,9 @@ public class FireFlyEntity extends LightOrbEntity implements IEntityAdditionalSp
         HashMap<BlockPos, Integer> randBlocks = new HashMap<>();
         for (int i = 0; i < 15; i++)
         {
-            BlockPos randBP = new BlockPos(this.posX + this.rand.nextGaussian() * 10, this.posY + this.rand.nextGaussian() * 10,
-                    this.posZ + this.rand.nextGaussian() * 10);
-            randBlocks.put(randBP, this.world.getLightFor(LightType.BLOCK, randBP));
+            BlockPos randBP = new BlockPos(this.serverPosX + this.rand.nextGaussian() * 10, this.serverPosY + this.rand.nextGaussian() * 10,
+                    this.serverPosZ + this.rand.nextGaussian() * 10);
+            randBlocks.put(randBP, this.world.func_226658_a_(LightType.BLOCK, randBP));
         }
         return randBlocks.entrySet().stream().max((entry1, entry2) -> entry1.getValue() > entry2.getValue() ? 1 : -1).get().getKey();
     }

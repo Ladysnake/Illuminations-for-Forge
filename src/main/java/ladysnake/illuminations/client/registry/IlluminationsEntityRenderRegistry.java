@@ -1,7 +1,6 @@
 package ladysnake.illuminations.client.registry;
 
 import ladysnake.illuminations.client.entity.render.RenderFireFly;
-import ladysnake.illuminations.entity.FireFlyEntity;
 import ladysnake.illuminations.mod.Illuminations;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -15,8 +14,8 @@ public class IlluminationsEntityRenderRegistry {
 
     @SubscribeEvent
     public static void doClientStuff(final FMLClientSetupEvent event) {
-
-        RenderingRegistry.registerEntityRenderingHandler(FireFlyEntity.class, RenderFireFly::new);
+        
+        RenderingRegistry.registerEntityRenderingHandler(Illuminations.ObjectHolders.FIREFLY_ENTITY_TYPE, RenderFireFly::new);
 
     }
 }
